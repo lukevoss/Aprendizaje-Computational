@@ -17,8 +17,35 @@ y= yok + yruido;
 
 % k-CV
 k = 10;
-crossvalError=[2:15];
-for grado = 2:15
+maxgrado = 20;
+crossvalError=[2:maxgrado];
+for grado = 2:maxgrado
     crossvalError(grado-1)=fcross(grado,x,y,k);
 end
-plot(2:15,crossvalError),xlabel("grado"),ylabel("Error"), legend("Cross Validation");
+plot(2:maxgrado,crossvalError),xlabel("grado"),ylabel("Error"), 
+legend("Cross Validation");
+
+
+% other sample data, where you can presume an increase in variance with
+% grade of polynom increasing
+
+rand('seed',0);
+randn('seed',0);
+clear
+clc
+N = 1000;
+x = 4*(rand(1,N)-0.5);
+yok = 2*x.^4+5+3*x;
+RUIDO = 2.8*std(yok);
+yruido = RUIDO*randn(size(yok));
+y= yok + yruido;
+
+% k-CV
+k = 10;
+maxgrado = 20;
+crossvalError=[2:maxgrado];
+for grado = 2:maxgrado
+    crossvalError(grado-1)=fcross(grado,x,y,k);
+end
+plot(2:maxgrado,crossvalError),xlabel("grado"),ylabel("Error"), 
+legend("Cross Validation");
