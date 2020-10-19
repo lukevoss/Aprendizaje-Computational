@@ -51,12 +51,12 @@ end
 %Bootstrap
 bootError = [2:maxgrado];
 for grado = 2:maxgrado
-    bootError(grado-1) = bootdata(x,k);
-end
+    bootError(grado-1) = bootdata(x,
+
     
 
-%plot(2:maxgrado,crossvalError),xlabel("grado"),ylabel("Error"), 
-%legend("Cross Validation") hold on
-plot(2:maxgrado, bootError), legend ("Bootstrap");
+plot(2:maxgrado,crossvalError),xlabel("grado"),ylabel("Error"), 
+legend("Cross Validation") hold on
+plot(bootError), legend ("Bootsrap");
 
 
