@@ -3,7 +3,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % creating sample data
-
+clear all;
+close all;
 rand('seed',0);
 randn('seed',0);
 clear
@@ -29,6 +30,8 @@ legend("Cross Validation");
 % other sample data, where you can presume an increase in variance with
 % grade of polynom increasing
 
+clear all;
+close all;
 rand('seed',0);
 randn('seed',0);
 clear
@@ -40,23 +43,22 @@ RUIDO = 2.8*std(yok);
 yruido = RUIDO*randn(size(yok));
 y= yok + yruido;
 
-% k-CV
+% k-CV, Bootstrap
 k = 10;
-maxgrado = 20;
-crossvalError=[2:maxgrado];
-for grado = 2:maxgrado
-    crossvalError(grado-1)=fcross(grado,x,y,k);
+maxgrado = 30;
+xAxis = [1:maxgrado];
+crossvalError = zeros(1,maxgrado);  %[2:maxgrado]
+bootError = zeros(1,maxgrado);   %[2:maxgrado];
+for grado = 1:maxgrado
+    crossvalError(grado) = fcross(grado,x,y,k);
 end
+plot(xAxis,crossvalError),xlabel("grado"),ylabel("Error"), 
+legend("Cross Validation");
 
-%Bootstrap
-bootError = [2:maxgrado];
-for grado = 2:maxgrado
-    bootError(grado-1) = bootdata(x,k);
-end
+
     
 
-%plot(2:maxgrado,crossvalError),xlabel("grado"),ylabel("Error"), 
-%legend("Cross Validation") hold on
-plot(2:maxgrado, bootError), legend ("Bootstrap");
+
+%plot(2:maxgrado, bootError), legend ("Bootstrap");
 
 
