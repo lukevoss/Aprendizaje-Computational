@@ -45,7 +45,7 @@ y= yok + yruido;
 
 % k-CV, Bootstrap
 k = 10;
-maxgrado = 30;
+maxgrado = 20;
 xAxis = [1:maxgrado];
 crossvalError = zeros(1,maxgrado);  %[2:maxgrado]
 bootError = zeros(1,maxgrado);   %[2:maxgrado];
