@@ -39,9 +39,11 @@ clc
 N = 1000;
 x = 4*(rand(1,N)-0.5);
 yok = 2*x.^4+5+3*x;
-RUIDO = 2.8*std(yok);
+RUIDO = 0.2*std(yok);
 yruido = RUIDO*randn(size(yok));
 y= yok + yruido;
+
+plot(y,'o');
 
 % k-CV, Bootstrap
 k = 10;
