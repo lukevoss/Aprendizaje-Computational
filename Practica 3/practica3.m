@@ -1,0 +1,1 @@
+A = importdata('wine.data');
