@@ -19,11 +19,11 @@ y= yok + yruido;
 % k-CV
 k = 10;
 maxgrado = 20;
-crossvalError=[2:maxgrado];
-for grado = 2:maxgrado
-    crossvalError(grado-1)=fcross(grado,x,y,k);
+crossvalError = zeros(1,maxgrado);
+for grado = 1:maxgrado
+    crossvalError(grado)=fcross(grado,x,y,k);
 end
-plot(2:maxgrado,crossvalError),xlabel("grado"),ylabel("Error"), 
+plot(1:maxgrado,crossvalError),xlabel("grado"),ylabel("Error"), 
 legend("Cross Validation");
 
 
@@ -45,7 +45,7 @@ y= yok + yruido;
 
 % k-CV, Bootstrap
 k = 10;
-maxgrado = 30;
+maxgrado = 20;
 xAxis = [1:maxgrado];
 crossvalError = zeros(1,maxgrado);  %[2:maxgrado]
 bootError = zeros(1,maxgrado);   %[2:maxgrado];

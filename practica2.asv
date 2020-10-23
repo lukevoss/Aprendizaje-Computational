@@ -18,7 +18,7 @@ y= yok + yruido;
 
 % k-CV
 k = 10;
-maxgrado = 20;
+maxgrado = 30;
 crossvalError=[2:maxgrado];
 for grado = 2:maxgrado
     crossvalError(grado-1)=fcross(grado,x,y,k);
@@ -49,7 +49,7 @@ maxgrado = 30;
 xAxis = [1:maxgrado];
 crossvalError = zeros(1,maxgrado);  %[2:maxgrado]
 bootError = zeros(1,maxgrado);   %[2:maxgrado];
-for grado = 2:maxgrado
+for grado = 1:maxgrado
     crossvalError(grado) = fcross(grado,x,y,k);
 end
 plot(xAxis,crossvalError),xlabel("grado"),ylabel("Error"), 
