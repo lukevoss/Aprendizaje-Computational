@@ -1,10 +1,10 @@
 close all
-x=[-4:0.1:4];
-y=sin(x).*sin(2*x);
+x=[-4:0.1:4];        %x axis
+y=sin(x).*sin(2*x);  %function
 
-ruido=std(y)*0.2;
+ruido=std(y)*0.2;    %ruido con standardverteilung
 
-xtest=rand(1,5000)*8-4;
+xtest=rand(1,5000)*8-4; %array with 5000 values between -4 and 4
 ytest=sin(xtest).*sin(2*xtest)+randn(1,5000)*ruido;
 
 Ntrain=100;
