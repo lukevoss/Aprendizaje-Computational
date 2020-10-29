@@ -1,2 +1,0 @@
-A = importdata('wine.data');
-meanArray = kmeans(A, 
