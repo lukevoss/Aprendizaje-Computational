@@ -27,9 +27,9 @@ plot(idx,'.')
 % Se ve que el clustering aun se puede mejorar. Tal vez deberiamos quitar
 % unos datos. Primero vamos a ver la distribucion de cada atributo.
 for i = 2:14
-    figure(i-1);
-    boxplot(Wines(:,i),Wines(:,1))
-    title(['Attribute ', num2str(i-1)]);
+    %figure(i-1);
+    %boxplot(Wines(:,i),Wines(:,1))
+    %title(['Attribute ', num2str(i-1)]);
 end
 
 %se ve que attributo 3,4 y 5 no sirven mucho. A ver si ayuda quitarlas del
