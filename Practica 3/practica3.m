@@ -25,6 +25,13 @@ plot(idx,'.')
 
 % Se ve que el clustering aun se puede mejorar. Tal vez deberiamos quitar
 % unos datos. Primero vamos a ver la distribucion de cada atributo.
+subplot(2,1,1)
+boxplot(Wines(:,2),Wines(:,1))
+subplot(2,1,2)
+boxplot(Wines(:,3),Wines(:,1))
+
+
 for i = 2:14
+    subplot(14,1,i);
     boxplot(Wines(:,i),Wines(:,1))
 end
