@@ -1,0 +1,49 @@
+%Load data
+
+Wines = importdata('wine.data');
+Bank = readtable('bank-full.csv','Headerlines',1);
+BankTest = readtable('bank.csv','Headerlines',1);
+
+%initialize Network
+
+function network = initialize_network(n_inputs, n_hidden, n_outputs)
+%n_inputs is the number of inputs
+%n_hidden is the number of neurons in the hidden layer, each with n_inputs+1 weights
+%(one for each input + bias)
+%n_outputs is the number of outputs, each with n_hidden+1 weights
+%(one for each neuron in hidden layer + bias)
+%
+% Returns array with weights
+hidden_layer=rand(n_hidden, n_inputs);
+output_layer=rand(n_outputs, n_hidden);
+network(:,:,1) = hidden_layer;
+network(:,:,2) = output_layer;
+end
+
+function activation = activar(weights, inputs)
+activation = weights(length(weights)); %Bias
+for i = 1:(length(weights)-1)
+    activation = activation + weights(i) * inputs(i);
+end
+end
+
+function sig_activation = transfer(activation)
+sig_activation=1/(1+exp(-activation));
+end
+
+function inputs = forward_propagate(network, row)
+inputs=row;
+for layer_index = 1:(size(network,3))
+    layer=network(:,:,layer_index);%for optimization leave out copying of data here
+    new_inputs = double.empty;
+    for neuron_index = 1:(size(layer,2))
+        activation = activar(layer(:,neuron_index), inputs);
+        new_inputs = [new_inputs tranfer(activation)];
+    end
+    inputs = new_inputs;
+end
+end
+
+function output = transfer_derivative(output)
+output = output * (1.0-output);
+end
