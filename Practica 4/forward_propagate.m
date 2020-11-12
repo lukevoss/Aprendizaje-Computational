@@ -11,7 +11,7 @@ function outputs = forward_propagate(network, row)
     inputs = new_inputs;
     %output layer
     new_inputs = double.empty %CHANGE: outputs = double.empty;
-    for neuron_index = 1:(size(network.output_layer,2))
+    for neuron_index = 1:(size(network.output_layer,1))
         activation = activar(network.output_layer(neuron_index, :), inputs); %CHANGED: network.output_layer(:, neuron_index) 
         new_inputs = [new_inputs transfer(activation)];
         %TODO output isnt saved in the neuron
