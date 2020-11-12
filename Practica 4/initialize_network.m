@@ -6,8 +6,8 @@ function network = initialize_network(n_inputs, n_hidden, n_outputs)
 %(one for each neuron in hidden layer + bias)
 %
 % Returns array with weights
-hidden_layer=rand(n_hidden, n_inputs);
-output_layer=rand(n_outputs, n_hidden);
+hidden_layer=rand(n_hidden, n_inputs+1); %+1 for bias
+output_layer=rand(n_outputs, n_hidden+1);%+1 for bias
 network.hidden_layer = hidden_layer;
 network.output_layer = output_layer;
 end
