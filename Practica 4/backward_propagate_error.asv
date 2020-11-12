@@ -9,21 +9,19 @@ function [network] = backward_propagate_error(network, expected)
                 error = 0.0;
                 layer2 = network.(fields{i+1});
                 for neuron = 1:size(layer2.weights,1)
-                    error = error + (layer2.weights(neuron, j)*layer2.delta(j));
+                    error = error + ((layer2.weights(neuron, j))*(layer2.delta(j)));
                 end
                 errors = [errors error];
-                disp(errors)
             end
         else
-            for j = 1:length(layer.weights)
-                errors = [errors (expected(j) - layer.output(j))]
+            for j = 1:size(layer.weights,1)
+                errors = [errors (expected(j) - layer.output(j))];
             end
         end
-        for j = 1:length(layer.weights)
-            layer.delta(j) = errors(j) * transfer_derivative(layer.output(j))
+        for j = 1:size(layer.weights,1)
+            layer.delta(j) = errors(j) * transfer_derivative(layer.output(j));
         end
         network.(fields{i})= layer;
-        disp(errors)
     end
 end
 
