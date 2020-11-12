@@ -6,7 +6,7 @@ Wines = importdata('wine.data');
 
 %initialize Network
 
-red = initialize_network(size(Wines,2),16,3);
+red = initialize_network(size(Wines,2)-1,16,3);
 red = train_network(red,Wines,0.9,40,3,14);
 
 

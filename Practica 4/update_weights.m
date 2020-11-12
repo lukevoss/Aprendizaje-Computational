@@ -1,8 +1,8 @@
 function [network] = update_weights(network, row, l_rate)
     fields = fieldnames(network);
     N = length(fields);
+    inputs = row(1:length(row)-1);
     for i = 1:N %iterate through layers
-        inputs = row(1:length(row)-1);
         if i ~= 1
             inputs = network.(fields{i-1}).output;
         end
