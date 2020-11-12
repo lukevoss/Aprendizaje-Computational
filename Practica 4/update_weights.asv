@@ -10,9 +10,9 @@ function [network] = update_weights(network, row, l_rate)
         N_neurons = size(layer.weights, 1);
         for neuron = 1:N_neurons
             for j = 1:length(inputs)
-                layer.weights(j, neuron) = layer.weights(j, neuron) + (l_rate * layer.delta(neuron) * inputs(j));
+                layer.weights(neuron, j) = layer.weights(neuron, j) + (l_rate * layer.delta(neuron) * inputs(j));
             end
-            layer.weights(neuron, N_neurons) = layer.weights(neuron, N_neurons) + (l_rate * layer.delta(neuron));
+            layer.weights(neuron, size(layer.weights,)) = layer.weights(neuron, N_neurons) + (l_rate * layer.delta(neuron));
         end
         network.(fields{i}) = layer;
     end
