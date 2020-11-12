@@ -14,6 +14,7 @@ function [network] = update_weights(network, row, l_rate)
             end
             layer.weights(neuron, N_neurons) = layer.weights(neuron, N_neurons) + (l_rate * layer.delta(neuron));
         end
+        network.(fields{i}) = layer;
     end
         
 end
