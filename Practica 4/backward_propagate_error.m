@@ -9,7 +9,7 @@ function [network] = backward_propagate_error(network, expected)
                 error = 0.0;
                 layer2 = network.(fields{i+1});
                 for neuron = 1:size(layer2.weights,1)
-                    error = error + (layer2.weights(neuron, j)*layer2.delta(j));
+                    error = error + ((layer2.weights(neuron, j))*(layer2.delta(neuron)));
                 end
                 errors = [errors error];
             end
