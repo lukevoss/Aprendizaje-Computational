@@ -1,20 +1,17 @@
-function outputs = forward_propagate(network, row)   
+function [network, inputs] = forward_propagate(network, row)   
 %row is input for network
     inputs=row;
-    %hidden layer
-    new_inputs = double.empty;
-    for neuron_index = 1:(size(network.hidden_layer,1)) %heigth of hidden layer %CHANGED:size(network.hidden_layer,2) 
-        activation = activar(network.hidden_layer(neuron_index, :), inputs); %CHANGED: network.hidden_layer(:, neuron_index) 
-        new_inputs = [new_inputs transfer(activation)];
-        %TODO output isnt saved in the neuron
+    
+    layers = fieldnames(network);
+    for layer_index = 1:numel(layers)
+
+    new_inputs = double.empty;%for speed purposes should be preallocated
+    for neuron_index = 1:(size(network.(layers{layer_index}).weights,1)) %heigth of hidden layer %CHANGED:size(network.hidden_layer,2) 
+        activation = activar(network.(layers{layer_index}).weights(neuron_index, :), inputs); %CHANGED: network.hidden_layer(:, neuron_index) 
+        trans_act = transfer(activation);
+        new_inputs = [new_inputs trans_act];
+        network.(layers{layer_index}).output(neuron_index)=trans_act;
     end
     inputs = new_inputs;
-    %output layer
-    new_inputs = double.empty %CHANGE: outputs = double.empty;
-    for neuron_index = 1:(size(network.output_layer,2))
-        activation = activar(network.output_layer(neuron_index, :), inputs); %CHANGED: network.output_layer(:, neuron_index) 
-        new_inputs = [new_inputs transfer(activation)];
-        %TODO output isnt saved in the neuron
     end
-    outputs = new_inputs;
 end
