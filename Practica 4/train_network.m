@@ -15,5 +15,9 @@ for epoch = 1:n_epoch
     end
     %epoch
     %sum_error
+    disp("-----------------------")
+    disp(epoch)
+    disp(l_rate)
+    disp(sum_error)
 end
 end
