@@ -6,7 +6,7 @@ for epoch = 1:n_epoch
     for row_index = 1:(size(train,1))
         [network, outputs]=forward_propagate(network,train(row_index,:));
         expected = zeros(1,n_outputs);
-        expected(train(row_index,colum_of_solution))=1;
+        expected(train(row_index,colum_of_solution)) = 1;
         for i = 1:length(expected)
             sum_error = sum_error + (expected(i)-outputs(i))^2;
         end
