@@ -11,7 +11,7 @@ for epoch = 1:n_epoch
             sum_error = sum_error + (expected(i)-outputs(i))^2;
         end
         network = backward_propagate_error(network, expected);
-        network = update_weights(network, train(row_index,:), l_rate);      
+        network = update_weights(network, (train(row_index,:)), l_rate);      
     end
     %epoch
     %sum_error
