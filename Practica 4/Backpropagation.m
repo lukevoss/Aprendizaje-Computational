@@ -74,5 +74,15 @@ Bank2_1 = Bank(39657,1:13);
 Bank2_2 = Bank(131,1:13);
 
 
+for i = 1:5000
+    guess = predict(red_Bank, Bank(i,1:end-1));
+    if guess(1)>= 0,5
+        guessed(i,1) = 1;
+    else
+        guessed(i,1) = 2;
+    end
+end
+expected = Bank(1:5000, 14);
+errors = sum(abs(expected-guessed));
 
 
