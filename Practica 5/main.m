@@ -15,5 +15,5 @@
  datos_test = linspace(0,5*pi,500);
  salida_real = sinc(datos_test);
  salida_RBF = rbfval(datos_test,centros,anchura,W);
- plot(datos_test,salida_real,’r’);hold on;
- plot(datos_test,salida_RBF,’g’);hold off;
+ plot(datos_test,salida_real,'r');hold on;
+ plot(datos_test,salida_RBF,'g');hold off;
