@@ -20,8 +20,21 @@ Wines = importdata('wine.data');
  W = rbftrain(patrones,salidas,centros,sigma);
 % C) COMPROBACION DEL FUNCIONAMIENTO DE LA RED
 % ============================================
+figure('Name','Euclidean Distance','NumberTitle','off');
  datos_test = linspace(0,5*pi,500);
  salida_real = sinc(datos_test);
  salida_RBF = rbfval(datos_test,centros,sigma,W);
  plot(datos_test,salida_real,'r');hold on;
- plot(datos_test,salida_RBF,'g');hold off;
+ plot(datos_test,salida_RBF,'g');
+ 
+ %Mahalanobis distance:
+[idx,centros]=kmedoids(patrones',NOCULTAS, 'Distance', 'mahalanobis');
+centros = centros'; %make row vector
+sigma = (max(centros)-min(centros)) /(sqrt(2*NOCULTAS));
+sigma = sigma*ones(1, NOCULTAS);
+W = rbftrain(patrones,salidas,centros,sigma);
+
+salida_RBF_mahal = rbfval(datos_test,centros,sigma,W);
+plot(datos_test,salida_RBF_mahal,'b');
+legend('sinc(x)','Euclidean Distance','Mahalanobis Distance');
+hold off;
