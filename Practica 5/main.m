@@ -1,4 +1,3 @@
- clear all;
 % A) DETERMINACION DE LOS DATOS DE ENTRENAMIENTO
 % ==============================================
  NPATRONES = 100;
@@ -11,7 +10,7 @@
 % B) ENTRENAMIENTO DE LA RBF
 % ==========================
  [idx,centros]=kmeans(patrones',NOCULTAS);
- centros = centros' %make row vector
+ centros = centros'; %make row vector
  sigma = (max(centros)-min(centros)) /(sqrt(2*NOCULTAS));
  sigma = sigma*ones(1, NOCULTAS);
  W = rbftrain(patrones,salidas,centros,sigma);
