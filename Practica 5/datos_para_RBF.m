@@ -45,7 +45,6 @@ centros = centros'; %make row vector
 sigma = (max(centros)-min(centros)) /(sqrt(2*NOCULTAS));
 sigma = sigma*ones(1, NOCULTAS);
 W = rbftrain(Xtrain,Ytrain,centros,sigma);
-
 salida_RBF_mahal = rbfval(datos_test,centros,sigma,W);
 plot(datos_test,salida_RBF_mahal,'b');
 
@@ -56,8 +55,8 @@ sigma = (max(centros)-min(centros)) /(sqrt(2*NOCULTAS));
 sigma = sigma*ones(1, NOCULTAS);
 W = rbftrain(Xtrain,Ytrain,centros,sigma);
 
-salida_RBF_mahal = rbfval(datos_test,centros,sigma,W);
-plot(datos_test,salida_RBF_mahal,'y');
+salida_RBF_city = rbfval(datos_test,centros,sigma,W);
+plot(datos_test,salida_RBF_city,'y');
 
 %Minkowski distance:
 [idx,centros]=kmedoids(Xtrain',NOCULTAS, 'Distance', 'minkowski');
@@ -66,8 +65,8 @@ sigma = (max(centros)-min(centros)) /(sqrt(2*NOCULTAS));
 sigma = sigma*ones(1, NOCULTAS);
 W = rbftrain(Xtrain,Ytrain,centros,sigma);
 
-salida_RBF_mahal = rbfval(datos_test,centros,sigma,W);
-plot(datos_test,salida_RBF_mahal,'m');
+salida_RBF_mink = rbfval(datos_test,centros,sigma,W);
+plot(datos_test,salida_RBF_mink,'m');
 
 
 
