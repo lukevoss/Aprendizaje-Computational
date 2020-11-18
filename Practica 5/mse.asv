@@ -1,4 +1,4 @@
-function mserror = mse(a,b)
+function mserror = mserror(a,b)
 %mse calculates the mean square error between the two arrays a and b of the same size.
 %returns -1 if an error accured.
 size = numel(a);

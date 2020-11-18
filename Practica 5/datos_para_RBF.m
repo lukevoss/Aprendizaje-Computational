@@ -33,9 +33,10 @@ grid
 % C) COMPROBACION DEL FUNCIONAMIENTO DE LA RED
 % ============================================
  datos_test = 8*rand(1,NDATA)-4;
- datos_test = sort(datos_test)
+ datos_test = sort(datos_test);
  salida_real = sin(datos_test).*sin(2*datos_test);
  salida_RBF = rbfval(datos_test,centros,sigma,W);
+ figure('Name','Approximation of functions','NumberTitle','off');
  plot(datos_test,salida_real);hold on;
  plot(datos_test,salida_RBF);
  
@@ -72,7 +73,18 @@ plot(datos_test,salida_RBF_mink,'m');
 
 legend('sin(x)sin(2x)','Euclidean Distance','Mahalanobis Distance', 'Cityblock Distance', 'Minkowski Distance');
 hold off;
- 
- 
+
+% plotting the error
+
+MSEeuc = mse(salida_real, salida_RBF);
+MSEmaha = mse(salida_real, salida_RBF_mahal);
+MSEcityb = mse(salida_real, salida_RBF_city);
+MSEmink = mse(salida_real, salida_RBF_mink);
+Errors = cat(2,MSEeuc,MSEmaha,MSEcityb,MSEmink);
+
+distances=categorical({'Euclidean','Mahalanobis','Cityblocks','Minkowski'});
+figure('Name','Mean Squared Error','NumberTitle','off');
+bar(distances,Errors);
+title('Mean Squared Error');
  
 
