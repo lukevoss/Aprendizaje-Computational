@@ -32,8 +32,8 @@ grid
 % C) COMPROBACION DEL FUNCIONAMIENTO DE LA RED
 % ============================================
  datos_test = 8*rand(1,NDATA)-4;
- salida_real = sin(datos_test).*sin(2*datos_test);
+ 
  salida_RBF = rbfval(datos_test,centros,sigma,W);
- plot(datos_test,salida_real,'.');hold on;
- plot(datos_test,salida_RBF,'o');hold off;
+ plot(datos_test,salida_real,'r');hold on;
+ plot(datos_test,salida_RBF,'g');hold off;
 

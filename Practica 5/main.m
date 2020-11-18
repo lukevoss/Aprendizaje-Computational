@@ -1,5 +1,9 @@
 % A) DETERMINACION DE LOS DATOS DE ENTRENAMIENTO
 % ==============================================
+
+Wines = importdata('wine.data');
+
+
  NPATRONES = 100;
  NOCULTAS = 10;
  RUIDO = 1.0;
