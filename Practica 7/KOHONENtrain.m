@@ -9,7 +9,7 @@ distancias = zeros(1,M);
 pesos_ant = w;
 t = 1;
 listo = false;
-while t<=T && ~listo %!!!!!!!!!komisches zeichen vor listo
+while t<=T && ~listo 
     % Tasa de aprendizaje se reduce con el n de íteraciones
     alpha = alpha0 * ( 1 - (t / T) );
     radio = round(radio0 * ( 1 - (t / T) ));

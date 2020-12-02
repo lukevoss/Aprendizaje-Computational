@@ -1,12 +1,43 @@
 clear all;
 close all;
 
-load('iris.data');
+FID = fopen('iris.txt');
+textdata = textscan(FID,'%f %f %f %f %s', 200, 'Delimiter',',');
 
-y = [t + 1]';
-X=X';
-W = fisher(X,y,2);
-x = W*X;
+%form the data matrix
+data = cell2mat(textdata(:,1:4));
+target=textdata{1,5};
+[m,n] = size(target);
+tr=[];
+
+%form the target matrix
+for k= 1:m
+    a=target(k);
+    if strcmp(a,'Iris-setosa')==1
+        l=-1;
+    elseif strcmp(a,'Iris-versicolor')==1
+        l=0;
+    else
+        l=1;
+    end
+    tr=[tr;l];
+end
+clear a;
+
+if max(abs(data(:)))> 1
+    %Hay que normalizar
+    data = data / max(abs(data(:)));
+else
+    data = data;
+end
+data = data.';
+tr = tr.';
+W = fisher(data,tr,2);
+red_data = W*data;
+
+%formar conjunto de datos de entrenamiento y test
+data_tr=[red_data(1:40,:);red_data(51:90,:);red_data(101:140,:)];
+data_test=[red_data(41:50,:);red_data(91:100,:);red_data(141:150,:)];
 
 dimension = 3;
 iteraciones = 1500;
@@ -17,16 +48,16 @@ vecindad = linkdist(w);
 w(1,:)= w(1,:)/dimension;
 w(2,:) = w(2,:)/dimension-mean(w(2,:));
 
-w = KOHONENtrain(x, w, iterationes, vecindad, alpha, radio);
+w = KOHONENtrain(red_data, w, iterationes, vecindad, alpha, radio);
 
-x = W*X(:,1:50);
-clase1 = KOHNENval(x,w);
+red_data = W*X(:,1:50);
+clase1 = KOHNENval(red_data,w);
 hold on;
 plot(w(1,clase1),w(2,clase1), 'k*');
-x = W*X(:,51:100);
-clase2 = KOHNENval(x,w);
+red_data = W*X(:,51:100);
+clase2 = KOHNENval(red_data,w);
 plot(w(1,clase2),w(2,clase2), 'm*');
-x = W*X(:,101:150);
-clase3 = KOHNENval(x,w);
+red_data = W*X(:,101:150);
+clase3 = KOHNENval(red_data,w);
 plot(w(1,clase3),w(2,clase3 ), 'c*');
 legend('muestra','enlaces', 'neuronas', 'clase 1', 'clase 2', 'clase 3');
