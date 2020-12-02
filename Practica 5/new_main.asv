@@ -1,8 +1,0 @@
-Wines = importdata('wine.data');
-
-Data = (Wines(:,2:14))';
-Outputs = (Wines(:,1))';
-net = newrb(Data,Outputs,0.1,1);
-view(net)
-results = sim(net,Data);
-plot(Data,results,)
