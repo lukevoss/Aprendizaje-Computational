@@ -32,8 +32,10 @@ else
 end
 data = data.';
 tr = tr.';
-W = fisher(data,tr,2);
-red_data = W*data;
+tr = tr +2;
+%W = fisher(data,tr,2);
+%red_data = W*data;
+red_data = [data', tr'];
 
 %formar conjunto de datos de entrenamiento y test
 data_tr=[red_data(1:40,:);red_data(51:90,:);red_data(101:140,:)];
@@ -48,7 +50,7 @@ vecindad = linkdist(w);
 w(1,:)= w(1,:)/dimension;
 w(2,:) = w(2,:)/dimension-mean(w(2,:));
 
-w = KOHONENtrain(red_data, w, iterationes, vecindad, alpha, radio);
+w = KOHONENtrain(red_data, w, iteraciones, vecindad, alpha, radio,0);
 
 red_data = W*X(:,1:50);
 clase1 = KOHNENval(red_data,w);

@@ -16,7 +16,7 @@ while t<=T && ~listo
     for i=1:N
         % Obtener BMU
         for j=1:M
-            distancias(j\item)=sumsqr(w(:,j)-x(:,i));
+            distancias(j)=sumsqr(w(:,j)-x(:,i));
         end
         [ ~,BMU]=min(distancias);
         %Modificamos de la BMU y de »us vçcxnas
