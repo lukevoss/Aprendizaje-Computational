@@ -1,4 +1,4 @@
-function class = KOHNENval(red_data,w)
+function class = som_evaluation(red_data,w)
 N = size(red_data,2);
 M = size(w,2);
 distancias = zeros(1,M);

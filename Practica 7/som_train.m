@@ -1,4 +1,4 @@
-function w = KOHONENtrain(x,w,T,vecindad,alpha0,radio0,plotear)
+function w = som_train(x,w,T,vecindad,alpha0,radio0,plotear)
 narginchk(7,7);
 % N neuronas en la capa de entrada.
 % En funcin de unos patrones con caraccersticas N-dimensìonales

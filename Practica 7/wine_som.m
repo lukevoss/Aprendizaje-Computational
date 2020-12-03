@@ -1,24 +1,20 @@
 close all;
 clear all;
 
-filename = 'iris.data';
+filename = 'wine.data';
 delimiter = ',';
-formatSpec = '%f%f%f%f%C%[^\n\r]';
+formatSpec = '%f%f%f%f%f%f%f%f%f%f%f%f%f%f%[^\n\r]';
 fileID = fopen(filename,'r');
 dataArray = textscan(fileID, formatSpec, 'Delimiter', delimiter, 'TextType', 'string',  'ReturnOnError', false);
 fclose(fileID);
-
-iris = table(dataArray{1:end-1}, 'VariableNames', {'sepallength','sepalwidth','petallength','petalwidth','class'});
-iris.class = grp2idx(categorical(iris.class));
-iris = table2array(iris);
-
+wine = [dataArray{1:end-1}];
 clearvars filename delimiter formatSpec fileID dataArray ans;
 
 %normalize data
-iris = normalize(iris, 'center', 'mean');
+wine = normalize(wine, 'center', 'mean');
 
-y = iris(:,5);
-X = iris(:,1:4);
+y = wine(:,1);
+X = iris(:,2:14);
 
 
 %Pricipal Component Analysis:
@@ -43,17 +39,17 @@ vecindad = linkdist(w);
 % w(2,:)= w(2,:)-mean(w(2,:));
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %transpose X_train to have x and y value in each column
-w = KOHONENtrain(X_train', w, iteraciones, vecindad, alpha, radio, 1);
+w = som_train(X_train', w, iteraciones, vecindad, alpha, radio, 1);
 clearvars iteraciones alpha radio dimension;
 
 red_data = X(1:50,:);
-clase1 = KOHNENval(red_data',w);
+clase1 = som_evaluation(red_data',w);
 c1 = unique(clase1);
 red_data = X(51:100,:);
-clase2 = KOHNENval(red_data',w);
+clase2 = som_evaluation(red_data',w);
 c2 = unique(clase2);
 red_data = X(101:150,:);
-clase3 = KOHNENval(red_data',w);
+clase3 = som_evaluation(red_data',w);
 c3 = unique(clase3);
 
 %clase 2 y clase 3 tienen valores superpuestos, por lo que determinamos 
@@ -90,6 +86,9 @@ clase1 = c1;
 clase2 = c2;
 clase3 = c3;
 clearvars new_c2 c1 c2 c3 counts2 counts3;
+
+
+%Plot
 hold on;
 plot(w(1, clase1),w(2, clase1), 'k*', 'MarkerSize', 7, 'LineWidth', 1);
 plot(w(1, clase2),w(2, clase2), 'm*', 'MarkerSize', 7, 'LineWidth', 1);
