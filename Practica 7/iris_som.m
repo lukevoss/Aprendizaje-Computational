@@ -80,7 +80,7 @@ for i = 1:length(c3)
         new_c3 = [new_c3 c3(i)];
     end
 end
-c3= new_c3
+c3= new_c3;
 clase1 = c1;
 clase2 = c2;
 clase3 = c3;
@@ -89,8 +89,8 @@ clearvars new_c2 c1 c2 c3 counts2 counts3;
 
 %Plot
 hold on;
-plot(w(1, clase1),w(2, clase1), 'k*', 'MarkerSize', 7, 'LineWidth', 1);
-plot(w(1, clase2),w(2, clase2), 'm*', 'MarkerSize', 7, 'LineWidth', 1);
-plot(w(1, clase3),w(2, clase3), 'c*', 'MarkerSize', 7, 'LineWidth', 1);
+plot(w(1, clase1),w(2, clase1), 'b o', 'MarkerSize', 7, 'LineWidth', 1);
+plot(w(1, clase2),w(2, clase2), 'k o', 'MarkerSize', 7, 'LineWidth', 1);
+plot(w(1, clase3),w(2, clase3), 'y o', 'MarkerSize', 7, 'LineWidth', 1);
 legend('muestra','enlaces', 'neuronas', 'Iris-setosa', 'Iris-versicolor', 'Iris-virginica');
 hold off;
