@@ -38,7 +38,7 @@ w = randtop(dim, dim);
 vecindad = linkdist(w);
 
 %transpose X_train to have x and y value in each column
-w = som_train(X_train', w, iter, vecindad, a, r, 1);
+w = som_train(X_train', w, iter, vecindad, a, r);
 clearvars iter a radio dimension;
 
 red_data = X(1:50,:);
@@ -89,8 +89,8 @@ clearvars new_c2 c1 c2 c3 counts2 counts3;
 
 %Plot
 hold on;
-plot(w(1, clase1),w(2, clase1), 'b o', 'MarkerSize', 7, 'LineWidth', 1);
-plot(w(1, clase2),w(2, clase2), 'k o', 'MarkerSize', 7, 'LineWidth', 1);
-plot(w(1, clase3),w(2, clase3), 'y o', 'MarkerSize', 7, 'LineWidth', 1);
+plot(w(1, clase1),w(2, clase1), 'b .', 'MarkerSize', 20, 'LineWidth', 1);
+plot(w(1, clase2),w(2, clase2), 'k .', 'MarkerSize', 20, 'LineWidth', 1);
+plot(w(1, clase3),w(2, clase3), 'y .', 'MarkerSize', 20, 'LineWidth', 1);
 legend('muestra','enlaces', 'neuronas', 'Iris-setosa', 'Iris-versicolor', 'Iris-virginica');
 hold off;
