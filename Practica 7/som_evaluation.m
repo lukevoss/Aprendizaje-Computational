@@ -1,15 +1,15 @@
-function class = som_evaluation(red_data,w)
-N = size(red_data,2);
+function class = som_evaluation(data,w)
+N = size(data,2);
 M = size(w,2);
 distancias = zeros(1,M);
 class = zeros(1,N);
 for i=1:N
-        % Obtener BMU
+        % Obtener Best Match
         for j=1:M
-            distancias(j)=sumsqr(w(:,j)-red_data(:,i));
+            distancias(j)=sumsqr(w(:,j)-data(:,i));
         end
-        [ ~,BMU]=min(distancias);
-        class(i) = BMU;
+        [ ~,best]=min(distancias);
+        class(i) = best;
 end
 end
 
