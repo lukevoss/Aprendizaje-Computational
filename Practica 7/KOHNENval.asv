@@ -1,0 +1,14 @@
+function class = KOHNENval(red_data,w)
+N = size(red_data,1);
+M = size(w,1);
+distancias = zeros(1,M);
+class = zeros(1,N);
+for i=1:N
+        % Obtener BMU
+        for j=size(w,1)
+            distancias(j)=sumsqr(w(:,j)-x(:,i));
+        end
+        [ ~,BMU]=min(distancias);
+        class(i) = BMU;
+end
+

@@ -45,14 +45,44 @@ vecindad = linkdist(w);
 %transpose X_train to have x and y value in each column
 w = KOHONENtrain(X_train', w, iteraciones, vecindad, alpha, radio, 1);
 
-red_data = X(:,1:50);
-clase1 = KOHNENval(red_data,w);
+red_data = X(1:50,:);
+clase1 = KOHNENval(red_data',w);
+c1 = unique(clase1);
+red_data = X(51:100,:);
+clase2 = KOHNENval(red_data',w);
+c2 = unique(clase2);
+red_data = X(101:150,:);
+clase3 = KOHNENval(red_data',w);
+c3 = unique(clase3);
+
+%clase 2 y clase 3 tienen valores superpuestos, por lo que determinamos 
+%para cada clase qué neuronas tienen distancias más cortas
+counts2 = zeros(1,length(c2));
+for i = 1:length(c2)
+    counts2(i) = sum(clase2==c2(i));
+end
+counts3 = zeros(1,length(c3));
+for i = 1:length(c3)
+    counts3(i) = sum(clase3==c3(i));
+end
+new_c2 = [];
+for i= 1:length(c2)
+    k = find(c3==c2(i));
+    if ~isempty(k)
+        if counts2(i) > counts3(k)
+            new_c2 = [new_c2 c2(i)];
+        end
+    else 
+        new_c2 = [new_c2 c2(i)]
+    end
+end
+c2 = new
+for i = 1:length(c3)
+    k = find(new_c2==c3(i));
+
 hold on;
-plot(w(1,clase1),w(2,clase1), 'k*');
-red_data = X(:,51:100);
-clase2 = KOHNENval(red_data,w);
-plot(w(1,clase2),w(2,clase2), 'm*');
-red_data = X(:,101:150);
-clase3 = KOHNENval(red_data,w);
-plot(w(1,clase3),w(2,clase3 ), 'c*');
-legend('muestra','enlaces', 'neuronas', 'clase 1', 'clase 2', 'clase 3');
+plot(w(1, clase1),w(2, clase1), 'k*', 'MarkerSize', 5, 'LineWidth', 2);
+plot(w(1, clase2),w(2, clase2), 'm*', 'MarkerSize', 5, 'LineWidth', 2);
+plot(w(1, clase3),w(2, clase3), 'c*', 'MarkerSize', 5, 'LineWidth', 2);
+legend('muestra','enlaces', 'neuronas', 'Iris-setosa', 'Iris-versicolor', 'Iris-virginica');
+hold off;

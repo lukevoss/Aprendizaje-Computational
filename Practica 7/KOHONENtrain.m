@@ -50,7 +50,7 @@ while t<=T && ~listo
         plot(x(1,:),x(2,:),'g.')
         hold on
         plotsom(w(1:2,:)',vecindad);
-        title(['Red KOHONEN entrada con t = ',num2str(t)]);
+        title(['Red KOHONEN entrada con T = ',num2str(T)]);
         hold off
         drawnow;
     end
