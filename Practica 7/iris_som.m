@@ -15,7 +15,7 @@ iris = table2array(iris);
 clearvars filename delimiter formatSpec fileID dataArray ans;
 
 %normalize data
-iris = normalize(iris, 'center', 'mean');
+iris = normalize(iris, 'range', [-1 1]);
 
 y = iris(:,5);
 X = iris(:,1:4);
