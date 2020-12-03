@@ -21,15 +21,15 @@ X = wine(:,2:14);
 [coeff, X,~,~,explained] = pca (X, 'NumComponents',2);
 percentage = sum(explained(1:2));
 
-dimension = 3;
-iteraciones = 1500;
-alpha = 0.5;
-radio = 5;
-w = randtop(dimension, dimension);
-vecindad = linkdist(w);
+a = 0.5;
+r = 6;
+dim = 3;
+iter = 400;
+w = randtop(dim, dim);
+v = linkdist(w);
 
 %transpose X_train to have x and y value in each column
-w = som_train(X', w, iteraciones, vecindad, alpha, radio);
+w = som_train(X', w, iter, v, a, r);
 clearvars iteraciones alpha radio dimension;
 
 red_data = X(1:50,:);
