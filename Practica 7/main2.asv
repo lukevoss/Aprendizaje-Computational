@@ -42,17 +42,17 @@ vecindad = linkdist(w);
 % w(1,:)= w(1,:)-mean(w(1,:));
 % w(2,:)= w(2,:)-mean(w(2,:));
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%transpose X_train to be 
+%transpose X_train to have x and y value in each column
 w = KOHONENtrain(X_train', w, iteraciones, vecindad, alpha, radio, 1);
 
-red_data = W*X(:,1:50);
+red_data = X(:,1:50);
 clase1 = KOHNENval(red_data,w);
 hold on;
 plot(w(1,clase1),w(2,clase1), 'k*');
-red_data = W*X(:,51:100);
+red_data = X(:,51:100);
 clase2 = KOHNENval(red_data,w);
 plot(w(1,clase2),w(2,clase2), 'm*');
-red_data = W*X(:,101:150);
+red_data = X(:,101:150);
 clase3 = KOHNENval(red_data,w);
 plot(w(1,clase3),w(2,clase3 ), 'c*');
 legend('muestra','enlaces', 'neuronas', 'clase 1', 'clase 2', 'clase 3');
