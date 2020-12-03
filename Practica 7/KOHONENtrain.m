@@ -19,17 +19,17 @@ while t<=T && ~listo
             distancias(j)=sumsqr(w(:,j)-x(:,i));
         end
         [ ~,BMU]=min(distancias);
-        %Modificamos de la BMU y de »us vçcxnas
+        %Modificamos de la BMU y de sus vecinas
         %Calculamos el incremento
         incremento = x(:,i) - w(:,BMU);
         %Lo vectorizamos para porder operar con
         inc = repmat(incremento,1,M);
         omega = zeros(1,M); % iniziamos omega a cero
-        %Buscamos los vecinos a una distancio <= radio
+        %Buscamos los vecinos a una distancia <= radio
         indices = find(vecindad(BMU,:)<=radio);
         for k = indices
             %Optamos por una funcion exponencial
-            omega(k)=l/exp(vecindad(BMU,k)');
+            omega(k)= 1 / exp(vecindad(BMU,k)');
         end
         %Preparamos omega para poder usarlo matricialmente
         omega = repmat(omega,size(w,1),1);
@@ -46,10 +46,10 @@ while t<=T && ~listo
     end
     % Si se desea, podemos observar el entrenamlenno de la red
     if plotear
-        figure(l)
+        figure(1)
         plot(x(1,:),x(2,:),'g.')
         hold on
-        plotsom(w(1:2,:)',vecinidad);
+        plotsom(w(1:2,:)',vecindad);
         title(['Red KOHONEN entrada con t = ',num2str(t)]);
         hold off
         drawnow;

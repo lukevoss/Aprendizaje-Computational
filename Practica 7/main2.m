@@ -36,10 +36,14 @@ alpha = 0.5;
 radio = 5;
 w = randtop(dimension, dimension);
 vecindad = linkdist(w);
-w(1,:)= w(1,:)/dimension;
-w(2,:) = w(2,:)/dimension-mean(w(2,:));
-
-w = KOHONENtrain(X_train, w, iterationes, vecindad, alpha, radio);
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%colocamos las neuronas en el centro de la muestra
+%??/dimensions
+% w(1,:)= w(1,:)-mean(w(1,:));
+% w(2,:)= w(2,:)-mean(w(2,:));
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%transpose X_train to have x and y value in each column
+w = KOHONENtrain(X_train', w, iteraciones, vecindad, alpha, radio, 1);
 
 red_data = W*X(:,1:50);
 clase1 = KOHNENval(red_data,w);
