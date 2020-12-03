@@ -30,21 +30,16 @@ y_train = [y(1:40,:); y(51:90,:); y(101:140,:)];
 X_test = [X(41:50,:); X(91:100,:); X(141:150,:)];
 y_test = [y(41:50,:); y(91:100,:); y(141:150,:)];
 
-dimension = 3;
-iteraciones = 1500;
-alpha = 0.5;
-radio = 5;
-w = randtop(dimension, dimension);
+dim = 3;
+iter = 500;
+a = 0.5;
+r = 6;
+w = randtop(dim, dim);
 vecindad = linkdist(w);
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%colocamos las neuronas en el centro de la muestra
-%??/dimensions
-% w(1,:)= w(1,:)-mean(w(1,:));
-% w(2,:)= w(2,:)-mean(w(2,:));
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 %transpose X_train to have x and y value in each column
-w = som_train(X_train', w, iteraciones, vecindad, alpha, radio, 1);
-clearvars iteraciones alpha radio dimension;
+w = som_train(X_train', w, iter, vecindad, a, r, 1);
+clearvars iter a radio dimension;
 
 red_data = X(1:50,:);
 clase1 = som_evaluation(red_data',w);
