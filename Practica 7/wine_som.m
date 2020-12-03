@@ -42,47 +42,11 @@ red_data = X(101:150,:);
 clase3 = som_evaluation(red_data',w);
 clase3 = unique(clase3);
 
-%clase 2 y clase 3 tienen valores superpuestos, por lo que determinamos 
-%para cada clase qué neuronas tienen distancias más cortas
-% counts2 = zeros(1,length(c2));
-% for i = 1:length(c2)
-%     counts2(i) = sum(clase2==c2(i));
-% end
-% counts3 = zeros(1,length(c3));
-% for i = 1:length(c3)
-%     counts3(i) = sum(clase3==c3(i));
-% end
-% new_c2 = [];
-% new_c3 = [];
-% for i= 1:length(c2)
-%     k = find(c3==c2(i));
-%     if ~isempty(k)
-%         if counts2(i) > counts3(k)
-%             new_c2 = [new_c2 c2(i)];
-%         end
-%     else 
-%         new_c2 = [new_c2 c2(i)];
-%     end
-% end
-% c2 = new_c2;
-% for i = 1:length(c3)
-%     k = find(c2==c3(i));
-%     if isempty(k)
-%         new_c3 = [new_c3 c3(i)];
-%     end
-% end
-% c3= new_c3
-% clase1 = c1;
-% clase2 = c2;
-% clase3 = c3;
-% clearvars new_c2 c1 c2 c3 counts2 counts3;
 
 %Plot
 hold on;
-
 plot(w(1, clase3),w(2, clase3), 'c*', 'MarkerSize', 7, 'LineWidth', 1);
 plot(w(1, clase2),w(2, clase2), 'm*', 'MarkerSize', 7, 'LineWidth', 1);
 plot(w(1, clase1),w(2, clase1), 'k*', 'MarkerSize', 7, 'LineWidth', 1);
-
 legend('muestra','enlaces', 'neuronas', 'class 1', 'class 2', 'class 3');
 hold off;
