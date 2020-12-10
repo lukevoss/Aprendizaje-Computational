@@ -1,7 +1,7 @@
 close all
 clear all
 
-%Cargar conjunto de datos:
+%% Cargar conjunto de datos:
 filename = 'bank.csv';
 delimiter = ';';
 startRow = 2;
@@ -12,7 +12,7 @@ fclose(fileID);
 bank = table(dataArray{1:end-1}, 'VariableNames', {'age','job','marital','education','default','balance','housing','loan','contact','day','month','duration','campaign','pdays','previous','poutcome','y'});
 clearvars filename delimiter startRow formatSpec fileID dataArray ans;
 
-%%Preprocesimiento de los datos:
+%% Preprocesimiento de los datos:
 
 %1. Cambiar string al valor double:
 bank.job = grp2idx(categorical(bank.job));
