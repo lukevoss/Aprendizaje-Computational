@@ -70,3 +70,8 @@ title 'Clusters and Centroids'
 xlabel 'Age'
 ylabel 'Balance'
 hold off
+
+%% K-Nearest Neighbours
+
+modelo = fitcknn(X,Y,'NumNeighbors',5,'Standardize',1);
+label = predict(modelo,X);
