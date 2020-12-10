@@ -46,14 +46,18 @@ clearvars P m n idx
 score_kmeans = 0;
 prediction = zeros(size(y_test,1),1);
 idx = normalize(idx, 'range', [-1 1]);
+modelo = fitcknn(x_train,y_train,'NumNeighbors',k,'Standardize',1);
+label = predict(modelo,x_test);
 for i = 1:size(x_test, 1)
-    for j = 1:2
+    for j = 1:3
         d(j) = sum((C(j,:)-x_test(i,:)).^2).^0.5;
     end
-    if d(1) <= d(2)
+    if d(1) <= d(2) && d(1) <= d(3)
         prediction(i) = 1;
-    else 
-        prediction(i) = -1;
+    elseif d(2) <= d(1) && d(2) <= d(3)
+        prediction(i) = 2;
+    else
+        prediction(i) = 3;
     end
 end
 

@@ -43,31 +43,31 @@ clearvars P m n idx
 %% Kmeans:
 
 [idx,C] = kmeans(x_train,3);
-score_kmeans = 0;
 prediction = zeros(size(y_test,1),1);
 idx = normalize(idx, 'range', [-1 1]);
+% using knn to get the labeling of kmeans correct instead of random :
+modelo_for_kmeans = fitcknn(x_train,y_train,'NumNeighbors',7,'Standardize',1);
+label = predict(modelo_for_kmeans,C);
 for i = 1:size(x_test, 1)
     for j = 1:3
         d(j) = sum((C(j,:)-x_test(i,:)).^2).^0.5;
     end
     if d(1) <= d(2) && d(1) <= d(3)
-        prediction(i) = 1;
+        prediction(i) = label(1);
     elseif d(2) <= d(1) && d(2) <= d(3)
-        prediction(i) = 2;
+        prediction(i) = label(2);
     else
-        prediction(i) = 3;
+        prediction(i) = label(3);
     end
 end
 
-score = zeros(6,1);
+score_kmeans = 0;
 for i = 1:size(y_test,1)
     if prediction(i)== y_test(i)
-            score(1) = score(1) + 1;
+            score_kmeans = score_kmeans + 1;
     end
 end
-prediction(prediction == 1) = 5;
 
-score_kmeans = max(score_kmeans, size(y_test,1)-score_kmeans);
 clearvars C ans d i idx j;
     
 
