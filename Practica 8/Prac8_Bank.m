@@ -122,7 +122,7 @@ end
 % varia con cada ejecucion.
 
 %% Plotear los resultados
-scores = [score_best,score_test_kmeans];
+scores = [score_best,score_kmeans];
 names = categorical({'KNN','Kmeans'});
 bar(names,scores)
 title('Performance of KNN and Kmeans');
