@@ -39,10 +39,12 @@ X = bank(:, 1:end-1);
 percentage = sum(explained(1:12)); %percentage = 99%
 X = X(:, 1:12);
 
-
+% x = cat(2,bank(:,1),bank(:,6));
+% y = bank(:,17);
 [idx,C] = kmeans(x,2);
 
 % disp(C);
+
 figure, hold on
 plot(x(idx==1,1),x(idx==1,2),'m.','MarkerSize',12)
 plot(x(idx==2,1),x(idx==2,2),'c.','MarkerSize',12)
