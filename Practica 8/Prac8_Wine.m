@@ -40,20 +40,48 @@ y_test = wine_test(:, end);
 
 clearvars P m n idx
 
-% %% Kmeans:
-% [idx,C] = kmeans(data,3);
+%% Kmeans:
+
+[idx,C] = kmeans(x_train,3);
+score_kmeans = 0;
+prediction = zeros(size(y_test,1),1);
+idx = normalize(idx, 'range', [-1 1]);
+for i = 1:size(x_test, 1)
+    for j = 1:3
+        d(j) = sum((C(j,:)-x_test(i,:)).^2).^0.5;
+    end
+    if d(1) <= d(2) && d(1) <= d(3)
+        prediction(i) = 1;
+    elseif d(2) <= d(1) && d(2) <= d(3)
+        prediction(i) = 2;
+    else
+        prediction(i) = 3;
+    end
+end
+
+score = zeros(6,1);
+for i = 1:size(y_test,1)
+    if prediction(i)== y_test(i)
+            score(1) = score(1) + 1;
+    end
+end
+prediction(prediction == 1) = 5;
+
+score_kmeans = max(score_kmeans, size(y_test,1)-score_kmeans);
+clearvars C ans d i idx j;
+    
+
 % 
+% % disp(C);
 % figure, hold on
-% plot(data(idx==1,1),data(idx==1,2),'m.','MarkerSize',12)
-% plot(data(idx==2,1),data(idx==2,2),'c.','MarkerSize',12)
-% plot(data(idx==3,1),data(idx==3,2),'g.','MarkerSize',12)
+% plot(X(idx==1,1),X(idx==1,2),'m.','MarkerSize',12)
+% plot(X(idx==2,1),X(idx==2,2),'c.','MarkerSize',12)
 % plot(C(1,1),C(1,2),'rx','MarkerSize',15,'LineWidth',3)
 % plot(C(2,1),C(2,2),'bx','MarkerSize',15,'LineWidth',3)
-% plot(C(3,1),C(3,2),'kx','MarkerSize',15,'LineWidth',3)
-% legend('Cluster 1','Cluster 2','Cluster 3','Centroid 1','Centroid 2','Centroid 3','Location','NW')
+% legend('Cluster 1','Cluster 2','Centroid 1','Centroid 2','Location','NW')
 % title 'Clusters and Centroids'
-% xlabel 'Alcohol'
-% ylabel 'Malic Acid'
+% xlabel 'Age'
+% ylabel 'Balance'
 % hold off
 
 %% K-Nearest Neighbours
