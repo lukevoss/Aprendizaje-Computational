@@ -58,15 +58,9 @@ clearvars P m n idx;
 %% Kmeans:
 
 [idx,C] = kmeans(x_train,2);
-score_train_kmeans = 0;
-score_test_kmeans = 0;
+score_kmeans = 0;
 prediction = zeros(size(y_test,1),1);
 idx = normalize(idx, 'range', [-1 1]);
-for i = 1 : size(idx,1)
-        if idx(i)== y_train(i)
-            score_train_kmeans = score_train_kmeans + 1;
-        end
-end
 for i = 1:size(x_test, 1)
     for j = 1:2
         d(j) = sum((C(j,:)-x_test(i,:)).^2).^0.5;
@@ -79,11 +73,11 @@ for i = 1:size(x_test, 1)
 end
 for i = 1:size(y_test,1)
     if prediction(i)== y_test(i)
-            score_test_kmeans = score_test_kmeans + 1;
+            score_kmeans = score_kmeans + 1;
     end
 end
-score_test_kmeans = max(score_test_kmeans, size(y_test,1)-score_test_kmeans);
-
+score_kmeans = max(score_kmeans, size(y_test,1)-score_kmeans);
+clearvars C ans d i idx j;
     
 
 % 
