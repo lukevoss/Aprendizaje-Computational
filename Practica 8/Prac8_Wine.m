@@ -22,8 +22,25 @@ X = wine(:,2:14);
 %2. Pricipal Component Analysis:
 [coeff, X,~,~,explained] = pca (X);
 percentage = sum(explained(1:12)); %Percentage: >99%
-X = X(1:12);
+X = X(:,1:12);
+wine = [X,Y];
 
+clearvars X Y
+%% Dividir los datos en datos de entrenamiento y datos de prueba
+[m,n] = size(wine);
+P = 0.80 ;
+idx = randperm(m);
+wine_train = wine(idx(1:round(P*m)),:); 
+wine_test = wine(idx(round(P*m)+1:end),:);
+
+x_train = wine_train(:, 1:end-1);
+y_train = wine_train(:, end);
+x_test = wine_test(:, 1:end-1);
+y_test = wine_test(:, end);
+
+clearvars P m n idx
+
+%% Kmeans:
 [idx,C] = kmeans(data,3);
 
 figure, hold on

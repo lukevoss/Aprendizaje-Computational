@@ -1,7 +1,7 @@
 close all
 clear all
 
-%Cargar conjunto de datos:
+%% Cargar conjunto de datos:
 filename = 'bank.csv';
 delimiter = ';';
 startRow = 2;
@@ -12,7 +12,7 @@ fclose(fileID);
 bank = table(dataArray{1:end-1}, 'VariableNames', {'age','job','marital','education','default','balance','housing','loan','contact','day','month','duration','campaign','pdays','previous','poutcome','y'});
 clearvars filename delimiter startRow formatSpec fileID dataArray ans;
 
-%%Preprocesimiento de los datos:
+%% Preprocesimiento de los datos:
 
 %1. Cambiar string al valor double:
 bank.job = grp2idx(categorical(bank.job));
@@ -38,13 +38,28 @@ X = bank(:, 1:end-1);
 [coeff, X,~,~,explained] = pca (X);
 percentage = sum(explained(1:12)); %percentage = 99%
 X = X(:, 1:12);
+bank = [X,Y];
+clearvars X Y c
 
-% x = cat(2,bank(:,1),bank(:,6));
-% y = bank(:,17);
+%% Dividir los datos en datos de entrenamiento y datos de prueba
+[m,n] = size(bank);
+P = 0.80 ;
+idx = randperm(m);
+bank_train = bank(idx(1:round(P*m)),:); 
+bank_test = bank(idx(round(P*m)+1:end),:);
+
+x_train = bank_train(:, 1:end-1);
+y_train = bank_train(:, end);
+x_test = bank_test(:, 1:end-1);
+y_test = bank_test(:, end);
+
+clearvars P m n idx
+
+%% Kmeans:
+
 [idx,C] = kmeans(x,2);
 
 % disp(C);
-
 figure, hold on
 plot(x(idx==1,1),x(idx==1,2),'m.','MarkerSize',12)
 plot(x(idx==2,1),x(idx==2,2),'c.','MarkerSize',12)
