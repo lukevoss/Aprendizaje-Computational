@@ -58,10 +58,11 @@ clearvars P m n idx;
 %% Kmeans:
 
 [idx,C] = kmeans(x_train,2);
-score_kmeans = 0;
+score_train_kmeans = 0;
+idx = normalize(idx, 'range', [-1 1]);
 for i = 1 : size(idx)
         if idx(i)== y_train(i)
-            score_kmeans = score_kmeans + 1;
+            score_train_kmeans = score_train_kmeans + 1;
         end
 end
 
@@ -100,7 +101,12 @@ end
 % parece que no hay una gran diferencia por diferentes k, y el mejor k
 % varia con cada ejecucion.
 
-
+%% Plotear los resultados
+scores = [score_best];
+names = categorical({'KNN'});
+bar(names,scores)
+title('Performance of KNN and Kmeans')
+ylabel(Ä
         
         
     

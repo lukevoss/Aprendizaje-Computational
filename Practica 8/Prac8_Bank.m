@@ -101,7 +101,12 @@ end
 % parece que no hay una gran diferencia por diferentes k, y el mejor k
 % varia con cada ejecucion.
 
-
+%% Plotear los resultados
+scores = [score_best];
+names = categorical({'KNN'});
+bar(names,scores)
+title('Performance of KNN and Kmeans');
+ylabel('correct categorizations out of 904');
         
         
     
