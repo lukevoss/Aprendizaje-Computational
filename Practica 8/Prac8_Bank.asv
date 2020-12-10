@@ -1,7 +1,7 @@
 close all
 clear all
 
-%Cargar conjunto de datos:
+%% Cargar conjunto de datos:
 filename = 'bank.csv';
 delimiter = ';';
 startRow = 2;
@@ -12,7 +12,7 @@ fclose(fileID);
 bank = table(dataArray{1:end-1}, 'VariableNames', {'age','job','marital','education','default','balance','housing','loan','contact','day','month','duration','campaign','pdays','previous','poutcome','y'});
 clearvars filename delimiter startRow formatSpec fileID dataArray ans;
 
-%%Preprocesimiento de los datos:
+%% Preprocesimiento de los datos:
 
 %1. Cambiar string al valor double:
 bank.job = grp2idx(categorical(bank.job));
@@ -39,12 +39,10 @@ X = bank(:, 1:end-1);
 percentage = sum(explained(1:12)); %percentage = 99%
 X = X(:, 1:12);
 
-% x = cat(2,bank(:,1),bank(:,6));
-% y = bank(:,17);
+
 [idx,C] = kmeans(x,2);
 
 % disp(C);
-
 figure, hold on
 plot(x(idx==1,1),x(idx==1,2),'m.','MarkerSize',12)
 plot(x(idx==2,1),x(idx==2,2),'c.','MarkerSize',12)
@@ -55,3 +53,9 @@ title 'Clusters and Centroids'
 xlabel 'Age'
 ylabel 'Balance'
 hold off
+
+%% K-Nearest Neighbours
+
+
+modelo = fitcknn(X,Y,'NumNeighbors',5,'Standardize',1);
+label = predict(modelo,X);

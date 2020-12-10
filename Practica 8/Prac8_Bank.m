@@ -40,12 +40,12 @@ percentage = sum(explained(1:12)); %percentage = 99%
 X = X(:, 1:12);
 
 
-[idx,C] = kmeans(x,2);
+[idx,C] = kmeans(X,2);
 
 % disp(C);
 figure, hold on
-plot(x(idx==1,1),x(idx==1,2),'m.','MarkerSize',12)
-plot(x(idx==2,1),x(idx==2,2),'c.','MarkerSize',12)
+plot(X(idx==1,1),X(idx==1,2),'m.','MarkerSize',12)
+plot(X(idx==2,1),X(idx==2,2),'c.','MarkerSize',12)
 plot(C(1,1),C(1,2),'rx','MarkerSize',15,'LineWidth',3)
 plot(C(2,1),C(2,2),'bx','MarkerSize',15,'LineWidth',3)
 legend('Cluster 1','Cluster 2','Centroid 1','Centroid 2','Location','NW')
@@ -55,6 +55,7 @@ ylabel 'Balance'
 hold off
 
 %% K-Nearest Neighbours
+
 
 modelo = fitcknn(X,Y,'NumNeighbors',5,'Standardize',1);
 label = predict(modelo,X);
