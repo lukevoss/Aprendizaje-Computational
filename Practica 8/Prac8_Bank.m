@@ -123,7 +123,7 @@ end
 
 %% Plotear los resultados
 scores = [score_best,score_test_kmeans];
-names = categorical({'KNN'});
+names = categorical({'KNN','Kmeans'});
 bar(names,scores)
 title('Performance of KNN and Kmeans');
 ylabel('correct categorizations out of 904');
