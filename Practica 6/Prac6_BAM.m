@@ -1,10 +1,12 @@
 close all
 clear all
 
-PX = [1 1 -1 -1; 1 -1 1 -1];
+PX = [1 -1 -1 1 -1 1 1 1 1 1 -1 -1 1 1 -1 1 1 -1 1 -1 1 1 -1 1 1;
+      -1 1 1 1 -1 1 -1 1 -1 1 1 1 -1 1 1 1 -1 1 -1 1 -1 1 1 1 -1;
+      1 1 1 -1 1 1 1 -1 1 -1 -1 1 1 -1 1 -1 1 1 1 1 1 -1 -1 1 1];
 tamx = size(PX,2);
 
-PY = [1 1 1 -1 -1 -1 -1 -1 -1; 1 -1 -1 1 -1 -1 1 -1 -1];
+PY = [1 -1 1 -1 1 -1 1 -1 1; -1 1 -1 1 -1 1 -1 1 -1; -1 1 -1 -1 1 1 1 -1 -1];
 tamy = size(PY,2);
 
 npat = size(PX,1); % npat_x = npat_y
@@ -19,7 +21,7 @@ for i = 1:npat
 end
 W = W ./ npat;
 
-Input = [1 1 -1 -1];
+Input = [1 1 1 -1 1 1 1 -1 1 -1 -1 1 1 -1 1 -1 1 1 1 1 1 -1 -1 1 1];
 
 stable = 0;
 XPrev = Input;
@@ -37,8 +39,50 @@ while stable ~= 1
     end
 end
 
-draw_matrix(PX(1,:),2);
-draw_matrix(PY(1,:),3);
+d = draw_matrix(PX(1,:),5);
+figure
+image(d)
+title('1ª pareja de patrones guardados (X)')
+colorbar
 
-draw_matrix(Input,2);
-draw_matrix(YNew,3);
+d = draw_matrix(PY(1,:),3);
+figure
+image(d)
+title('1ª pareja de patrones guardados (Y)')
+colorbar
+
+d = draw_matrix(PX(2,:),5);
+figure
+image(d)
+title('2ª pareja de patrones guardados (X)')
+colorbar
+
+d = draw_matrix(PY(2,:),3);
+figure
+image(d)
+title('2ª pareja de patrones guardados (Y)')
+colorbar
+
+d = draw_matrix(PX(3,:),5);
+figure
+image(d)
+title('3ª pareja de patrones guardados (X)')
+colorbar
+
+d = draw_matrix(PY(3,:),3);
+figure
+image(d)
+title('3ª pareja de patrones guardados (Y)')
+colorbar
+
+d = draw_matrix(Input,5);
+figure
+image(d)
+title('Input: Patrón a emparejar (X)')
+colorbar
+
+d = draw_matrix(YNew,3);
+figure
+image(d)
+title('Input: Patrón pareja encontrado (Y)')
+colorbar
