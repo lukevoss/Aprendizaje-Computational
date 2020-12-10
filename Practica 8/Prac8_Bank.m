@@ -35,10 +35,27 @@ Y = bank(:, end);
 X = bank(:, 1:end-1);
 
 %4. Pricipal Component Analysis:
-[coeff, X,~,~,explained] = pca (X);
+[~, X,~,~,explained] = pca (X);
 percentage = sum(explained(1:12)); %percentage = 99%
 X = X(:, 1:12);
+bank = [X,Y];
+clearvars X Y 
 
+%% Dividir los datos en datos de entrenamiento y datos de prueba
+[m,n] = size(bank);
+P = 0.80 ;
+idx = randperm(m);
+bank_train = bank(idx(1:round(P*m)),:); 
+bank_test = bank(idx(round(P*m)+1:end),:);
+
+x_train = bank_train(:, 1:end-1);
+y_train = bank_train(:, end);
+x_test = bank_test(:, 1:end-1);
+y_test = bank_test(:, end);
+
+clearvars P m n idx
+
+%% Kmeans:
 
 [idx,C] = kmeans(X,2);
 
