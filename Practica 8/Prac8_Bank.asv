@@ -39,7 +39,7 @@ X = bank(:, 1:end-1);
 percentage = sum(explained(1:12)); %percentage = 99%
 X = X(:, 1:12);
 bank = [X,Y];
-clearvars X Y 
+clearvars X Y; 
 
 %% Dividir los datos en datos de entrenamiento y datos de prueba
 [m,n] = size(bank);
@@ -53,11 +53,18 @@ y_train = bank_train(:, end);
 x_test = bank_test(:, 1:end-1);
 y_test = bank_test(:, end);
 
-clearvars P m n idx
+clearvars P m n idx;
 
 %% Kmeans:
-% 
-% [idx,C] = kmeans(X,2);
+
+[idx,C] = kmeans(x_train,2);
+score_kmeans = 0;
+for i = 1 : size(idx)
+        if idx(i)== y_train(i)
+            score_kmeans = score_kmeans + 1;
+        end
+end
+
 % 
 % % disp(C);
 % figure, hold on
@@ -76,17 +83,24 @@ clearvars P m n idx
 % encontrar un k adequado 
 k_best=1;
 score_best = 0;
-for k = 1:20
+for k = 1:30
     modelo = fitcknn(x_train,y_train,'NumNeighbors',k,'Standardize',1);
     label = predict(modelo,x_test);
-    counter = 0;
+    score_knn = 0;
     for i = 1 : size(label)
         if label(i)== y_test(i)
-            counter = counter + 1;
+            score_knn = score_knn + 1;
         end
     end
-    if score < counter
-        score = counter + 1 %+1 para k que tambien sea lo mas pequeno posible
+    if score_best < score_knn
+        score_best = score_knn;
+        k_best = k;
+    end
+end
+% parece que no hay una gran diferencia por diferentes k, y el mejor k
+% varia con cada ejecucion.
+
+
         
         
     

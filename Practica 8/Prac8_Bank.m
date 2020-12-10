@@ -39,7 +39,7 @@ X = bank(:, 1:end-1);
 percentage = sum(explained(1:12)); %percentage = 99%
 X = X(:, 1:12);
 bank = [X,Y];
-clearvars X Y 
+clearvars X Y; 
 
 %% Dividir los datos en datos de entrenamiento y datos de prueba
 [m,n] = size(bank);
@@ -53,11 +53,19 @@ y_train = bank_train(:, end);
 x_test = bank_test(:, 1:end-1);
 y_test = bank_test(:, end);
 
-clearvars P m n idx
+clearvars P m n idx;
 
 %% Kmeans:
-% 
-% [idx,C] = kmeans(X,2);
+
+[idx,C] = kmeans(x_train,2);
+score_train_kmeans = 0;
+idx = normalize(idx, 'range', [-1 1]);
+for i = 1 : size(idx)
+        if idx(i)== y_train(i)
+            score_train_kmeans = score_train_kmeans + 1;
+        end
+end
+
 % 
 % % disp(C);
 % figure, hold on
@@ -79,14 +87,14 @@ score_best = 0;
 for k = 1:30
     modelo = fitcknn(x_train,y_train,'NumNeighbors',k,'Standardize',1);
     label = predict(modelo,x_test);
-    score = 0;
+    score_knn = 0;
     for i = 1 : size(label)
         if label(i)== y_test(i)
-            score = score + 1;
+            score_knn = score_knn + 1;
         end
     end
-    if score_best < score
-        score_best = score;
+    if score_best < score_knn
+        score_best = score_knn;
         k_best = k;
     end
 end
