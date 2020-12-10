@@ -97,26 +97,27 @@ clearvars C ans d i idx j;
 
 % encontrar un k adequado 
 k_best=1;
-score_best = 0;
+score_knn = 0;
 for k = 1:30
     modelo = fitcknn(x_train,y_train,'NumNeighbors',k,'Standardize',1);
     label = predict(modelo,x_test);
-    score_knn = 0;
+    score = 0;
     for i = 1 : size(label)
         if label(i)== y_test(i)
-            score_knn = score_knn + 1;
+            score = score + 1;
         end
     end
-    if score_best < score_knn
-        score_best = score_knn;
+    if score_knn < score
+        score_knn = score;
         k_best = k;
     end
 end
+clearvars modelo k i k_best label score
 % parece que no hay una gran diferencia por diferentes k, y el mejor k
 % varia con cada ejecucion.
 
 %% Plotear los resultados
-scores = [score_best,score_kmeans];
+scores = [score_knn,score_kmeans];
 names = categorical({'KNN','Kmeans'});
 bar(names,scores)
 title('Performance of KNN and Kmeans');
