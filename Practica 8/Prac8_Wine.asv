@@ -20,9 +20,8 @@ X = wine(:,2:14);
 
 
 %2. Pricipal Component Analysis:
-[coeff, X,~,~,explained] = pca (X);
+[coeff, X,~,~,explained] = pca (X, 'NumComponents',2);
 percentage = sum(explained(1:12)); %Percentage: >99%
-X = X(1:12);
 
 [idx,C] = kmeans(data,3);
 
