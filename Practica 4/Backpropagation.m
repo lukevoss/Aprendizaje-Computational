@@ -51,19 +51,19 @@ Wines(:,end+1) = y_Wines;
 
 
 %initialize Network
-%red_Wines = initialize_network(13,13,3);
-red_Bank = initialize_network(13,13,2);
+red_Wines = initialize_network(13,13,3);
+%red_Bank = initialize_network(13,13,2);
 
 %entrenamiento de red neuronal Wines
-%red_Wines = train_network(red_Wines,Wines_normalized,0.2,1000,3,14);
+red_Wines = train_network(red_Wines,Wines,0.2,1000,3,14);
 
 %entrenamiento de red neuronal Bank con muestras aleatorias
 %y stochastic gradient descend:
-for i= 1:10 
-    idx = randi(size(Bank,1),1000,1);
-    Bank_rand = Bank(idx,:);%randomly select 100 Datapoint and train with them
-    red_Bank = train_network(red_Bank,Bank_rand,0.6,100,2,size(Bank,2));
-end
+% for i= 1:500 
+%     idx = randi(size(Bank,1),1000,1);
+%     Bank_rand = Bank(idx,:);%randomly select 100 Datapoint and train with them
+%     red_Bank = train_network(red_Bank,Bank_rand,0.6,100,2,size(Bank,2));
+% end
 
 Wine1 = Wines(1,:);
 Wine2 = Wines(90,:);
@@ -73,16 +73,19 @@ Bank1 = Bank(1, 1:13);
 Bank2_1 = Bank(39657,1:13);
 Bank2_2 = Bank(131,1:13);
 
+predict(red_Wines, Wine1);
+predict(red_Wines, Wine2);
+predict(red_Wines, Wine3);
 
-for i = 1:5000
-    guess = predict(red_Bank, Bank(i,1:end-1));
-    if guess(1)>= 0,5
-        guessed(i,1) = 1;
-    else
-        guessed(i,1) = 2;
-    end
-end
-expected = Bank(1:5000, 14);
-errors = sum(abs(expected-guessed));
+% for i = 1:5000
+%     guess = predict(red_Bank, Bank(i,1:end-1));
+%     if guess(1)>= 0,5
+%         guessed(i,1) = 1;
+%     else
+%         guessed(i,1) = 2;
+%     end
+% end
+% expected = Bank(1:5000, 14);
+% errors = sum(abs(expected-guessed));
 
 

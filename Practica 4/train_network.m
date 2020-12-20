@@ -1,4 +1,4 @@
-function network = train_network(network, train, l_rate, n_epoch, n_outputs, colum_of_solution)
+pofunction network = train_network(network, train, l_rate, n_epoch, n_outputs, colum_of_solution)
 %UNTITLED6 Summary of this function goes here
 %   Detailed explanation goes here
 for epoch = 1:n_epoch
