@@ -106,6 +106,10 @@ end
 % parece que no hay una gran diferencia por diferentes k, y el mejor k
 % varia con cada ejecucion.
 
+%% Clustering Jerárquico
+
+pdist(x_test);
+
 %% Plotear los resultados
 scores = [score_best,score_kmeans];
 names = categorical({'KNN','Kmeans'});

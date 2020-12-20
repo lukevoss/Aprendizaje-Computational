@@ -38,7 +38,7 @@ clase1 = unique(c1);
 red_data = X(60:130,:);
 c2 = som_evaluation(red_data',w);
 clase2 = unique(c2);
-red_data = X(131:178,:);
+red_data = X(101:150,:);
 c3 = som_evaluation(red_data',w);
 clase3 = unique(c3);
 
@@ -89,7 +89,7 @@ for i = 1:length(c3)
     end
 end
 
-percentage = (score/size(X,1)) * 100;
+percentage = 
 
 %Plot
 hold on;
