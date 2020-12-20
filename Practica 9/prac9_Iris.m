@@ -85,7 +85,7 @@ score = score + max([a b c]);
 a = 0;
 b = 0;
 c = 0;
-for i=50:100
+for i=51:100
     if cl(i) == 1
         a = a + 1;
     elseif cl(i) == 2
@@ -98,7 +98,7 @@ score = score + max([a b c]);
 a = 0;
 b = 0;
 c = 0;
-for i=100:150
+for i=101:150
     if cl(i) == 1
         a = a + 1;
     elseif cl(i) == 2

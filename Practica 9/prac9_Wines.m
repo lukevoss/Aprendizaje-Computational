@@ -94,7 +94,7 @@ score = score + max([a b c]);
 a = 0;
 b = 0;
 c = 0;
-for i=130:178
+for i=131:178
     if cl(i) == 1
         a = a + 1;
     elseif cl(i) == 2
