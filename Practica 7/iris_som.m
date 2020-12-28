@@ -42,50 +42,63 @@ w = som_train(X_train', w, iter, vecindad, a, r);
 clearvars iter a radio dimension;
 
 red_data = X(1:50,:);
-clase1 = som_evaluation(red_data',w);
-c1 = unique(clase1);
+c1 = som_evaluation(red_data',w);
+clase1 = unique(c1);
 red_data = X(51:100,:);
-clase2 = som_evaluation(red_data',w);
-c2 = unique(clase2);
+c2 = som_evaluation(red_data',w);
+clase2 = unique(c2);
 red_data = X(101:150,:);
-clase3 = som_evaluation(red_data',w);
-c3 = unique(clase3);
+c3 = som_evaluation(red_data',w);
+clase3 = unique(c3);
 
 %clase 2 y clase 3 tienen valores superpuestos, por lo que determinamos 
 %para cada clase qué neuronas tienen distancias más cortas
-counts2 = zeros(1,length(c2));
-for i = 1:length(c2)
-    counts2(i) = sum(clase2==c2(i));
-end
-counts3 = zeros(1,length(c3));
-for i = 1:length(c3)
-    counts3(i) = sum(clase3==c3(i));
-end
-new_c2 = [];
-new_c3 = [];
-for i= 1:length(c2)
-    k = find(c3==c2(i));
-    if ~isempty(k)
-        if counts2(i) > counts3(k)
-            new_c2 = [new_c2 c2(i)];
-        end
-    else 
-        new_c2 = [new_c2 c2(i)];
+elementos_dobles = intersect(clase3, clase2);
+for i = 1: length(elementos_dobles)
+    elements_clase2 = sum(c2==elementos_dobles(i));
+    elements_clase3 = sum(c3==elementos_dobles(i));
+    if (elements_clase3 >= elements_clase2)
+        index = find(clase2 == elementos_dobles(i));
+        clase2(index)=[];
+    else
+        index = find(clase3 == elementos_dobles(i));
+        clase3(index)=[];
     end
 end
-c2 = new_c2;
-for i = 1:length(c3)
-    k = find(c2==c3(i));
-    if isempty(k)
-        new_c3 = [new_c3 c3(i)];
-    end
-end
-c3= new_c3;
-clase1 = c1;
-clase2 = c2;
-clase3 = c3;
-clearvars new_c2 c1 c2 c3 counts2 counts3;
 
+%Mismo con las clases 2 y 1
+elementos_dobles = intersect(clase2, clase1);
+for i = 1: length(elementos_dobles)
+    elements_clase2 = sum(c2==elementos_dobles(i));
+    elements_clase1 = sum(c1==elementos_dobles(i));
+    if (elements_clase1 >= elements_clase2)
+        index = find(clase2 == elementos_dobles(i));
+        clase2(index)=[];
+    else
+        index = find(clase1 == elementos_dobles(i));
+        clase1(index)=[];
+    end
+end
+
+%Pruebe qué tan bien se desempeña la clasificación
+score = 0;
+for i = 1:length(c1)
+    if (ismember(c1(i),clase1))
+        score = score +1;
+    end
+end
+for i = 1:length(c2)
+    if (ismember(c2(i),clase2))
+        score = score +1;
+    end
+end
+for i = 1:length(c3)
+    if (ismember(c3(i),clase3))
+        score = score +1;
+    end
+end
+
+percentage = (score/size(X,1)) * 100;
 
 %Plot
 hold on;
