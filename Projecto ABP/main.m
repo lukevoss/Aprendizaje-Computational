@@ -16,9 +16,10 @@ wdbc = table(dataArray{1:end-1}, 'VariableNames', {'ID','Diagnosis','VarName3','
 
 clearvars filename delimiter formatSpec fileID dataArray ans;
 
-wdbc.Diagnosis = grp2idx(categorical(wdbc.Diagnosis));
+wdbc.Diagnosis = grp2idx(categorical(wdbc.Diagnosis))-1; % 1 = Malignant, 0 = Begnin
 wdbc = table2array(wdbc);
-wdbc = wdbc(2:end, end)
+wdbc = wdbc(:, 2:32);
+data = wdbc;
 
 %% Preprocesimiento de los datos:
 
