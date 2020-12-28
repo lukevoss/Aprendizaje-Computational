@@ -26,11 +26,12 @@ data = wdbc;
 %1. Normalizar Datos:
 data = normalize(data, 'range', [-1 1]);
 Y = data(:,1);
-X = data(:,2:14);
+X = data(:,2:end);
 
 
 %2. Pricipal Component Analysis:
-[coeff, X,~,~,explained] = pca (X);
-percentage = sum(explained(1:12)); %Percentage: >99%
+[coeff, X,~,~,explained] = pca (X, 'NumComponents', 20);
+percentage = sum(explained(1:20)); %Percentage: >99.6%
+% printf("")
 X = X(:,1:12);
-data = [X,Y];
+% data = [X,Y];
